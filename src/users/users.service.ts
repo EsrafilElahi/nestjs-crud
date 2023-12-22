@@ -36,7 +36,8 @@ export class UsersService {
   }
 
   deleteUser(index: number) {
-    if (!index) {
+    const user = this.users[index];
+    if (!user) {
       throw new NotFoundException();
     }
 
