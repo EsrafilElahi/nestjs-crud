@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -19,7 +20,7 @@ export class UsersController {
   }
 
   @Get(':index')
-  getOne(@Param('index') index: number) {
+  getOne(@Param('index', ParseIntPipe) index: number) {
     return this.usersService.getOne(index);
   }
 
@@ -34,7 +35,7 @@ export class UsersController {
   }
 
   @Delete(':index')
-  deleteUser(@Param('index') index: number) {
+  deleteUser(@Param('index', ParseIntPipe) index: number) {
     return this.usersService.deleteUser(index);
   }
 }
