@@ -16,10 +16,21 @@ export class UsersService {
     return user;
   }
 
-  createUser(user: string) {
-    if (!user) {
+  createUser(userDto: any) {
+    if (!userDto) {
       throw new NotFoundException();
     }
-    this.users.push(user);
+    this.users.push(userDto?.name);
+
+    return this.users;
+  }
+
+  updateUser(userDto: any) {
+    if (!userDto) {
+      throw new NotFoundException();
+    }
+    this.users[userDto.index] = userDto.name;
+
+    return this.users;
   }
 }
