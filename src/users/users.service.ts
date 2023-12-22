@@ -13,7 +13,13 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException();
     }
-
     return user;
+  }
+
+  createUser(user: string) {
+    if (!user) {
+      throw new NotFoundException();
+    }
+    this.users.push(user);
   }
 }

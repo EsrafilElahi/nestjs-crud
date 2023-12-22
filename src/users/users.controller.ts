@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -6,12 +6,17 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  getUsers(): string[] {
+  getUsers() {
     return this.usersService.getUsers();
   }
 
   @Get(':index')
-  getOne(@Param('index') index: number): string {
+  getOne(@Param('index') index: number) {
     return this.usersService.getOne(index);
+  }
+
+  @Post()
+  createUser(@Body() userDto: any) {
+    return this.usersService.createUser(userDto);
   }
 }
