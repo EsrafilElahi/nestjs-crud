@@ -9,6 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -25,12 +26,12 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() userDto: any) {
+  createUser(@Body() userDto: CreateUserDto) {
     return this.usersService.createUser(userDto);
   }
 
   @Put()
-  updateUser(@Body() userDto: any) {
+  updateUser(@Body() userDto: CreateUserDto) {
     return this.usersService.updateUser(userDto);
   }
 
