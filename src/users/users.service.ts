@@ -26,7 +26,8 @@ export class UsersService {
   }
 
   updateUser(userDto: any) {
-    if (!userDto) {
+    const user = this.users[userDto.index];
+    if (!user) {
       throw new NotFoundException();
     }
     this.users[userDto.index] = userDto.name;
