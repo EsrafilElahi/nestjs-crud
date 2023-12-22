@@ -33,4 +33,14 @@ export class UsersService {
 
     return this.users;
   }
+
+  deleteUser(index: number) {
+    if (!index) {
+      throw new NotFoundException();
+    }
+
+    delete this.users[index];
+
+    return this.users;
+  }
 }
