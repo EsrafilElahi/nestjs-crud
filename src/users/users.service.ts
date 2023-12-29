@@ -1,25 +1,37 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './users.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from 'src/entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  private readonly users: string[] = ['esrafil', 'tom', 'charlize', 'margo'];
+  constructor(
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
+  ) {}
 
-  getUsers(): string[] {
-    return this.users;
+  async getUsers() {
+    return await this.userRepository.find();
   }
 
-  getOne(index: number) {
-    const user = this.users[index];
+  async getOne(id: number) {
+    const user = await this.userRepository.findOne({ where: { id: id } });
     if (!user) {
       throw new NotFoundException();
+    } else {
+      return user;
     }
-    return user;
   }
 
-  createUser(userDto: CreateUserDto) {
+  async createUser(userDto: CreateUserDto) {
     if (!userDto) {
-      throw new NotFoundException();
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
     this.users.push(userDto?.name);
 
