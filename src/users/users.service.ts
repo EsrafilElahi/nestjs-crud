@@ -33,9 +33,8 @@ export class UsersService {
     if (!userDto) {
       throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
-    this.users.push(userDto?.name);
-
-    return this.users;
+    const createdUser = await this.userRepository.create(userDto);
+    return await this.userRepository.save(createdUser);
   }
 
   updateUser(userDto: CreateUserDto) {
