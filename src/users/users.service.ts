@@ -34,27 +34,16 @@ export class UsersService {
       throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
     const createdUser = await this.userRepository.create(userDto);
-    return await this.userRepository.save(createdUser);
+    await this.userRepository.save(createdUser);
+    return createdUser;
   }
 
-  updateUser(userDto: CreateUserDto) {
-    const user = this.users[userDto.index];
-    if (!user) {
-      throw new NotFoundException();
-    }
-    this.users[userDto.index] = userDto.name;
-
-    return this.users;
+  async updateUser(userDto: CreateUserDto) {
+    await this.userRepository.save(userDto);
+    return { msg: 'updated user successfully', user: userDto };
   }
 
-  deleteUser(index: number) {
-    const user = this.users[index];
-    if (!user) {
-      throw new NotFoundException();
-    }
-
-    delete this.users[index];
-
-    return this.users;
+  deleteUser(id: number) {
+    
   }
 }
