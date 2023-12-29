@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { DataSource } from 'typeorm';
       username: 'root',
       password: '123456',
       database: 'crud-nest',
-      entities: [],
+      entities: [UserEntity],
       synchronize: true,
     }),
     UsersModule,
