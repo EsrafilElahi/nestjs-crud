@@ -44,6 +44,13 @@ export class UsersService {
   }
 
   deleteUser(id: number) {
-    
+    const foundUser = this.userRepository.findOne({ where: { id: id } });
+    if (!foundUser) {
+      throw new NotFoundException();
+    }
+
+    this.userRepository.delete(id);
+    // this.userRepository.remove(user); ---> this is for delete user with userData
+    // this.userRepository.remove([user1, user2]); ---> this is for delete user with userData of array
   }
 }
