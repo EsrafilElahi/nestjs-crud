@@ -20,9 +20,9 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 
-  @Get(':index')
-  getOne(@Param('index', ParseIntPipe) index: number) {
-    return this.usersService.getOne(index);
+  @Get(':id')
+  getOne(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getOne(id);
   }
 
   @Post()
@@ -35,8 +35,8 @@ export class UsersController {
     return this.usersService.updateUser(userDto);
   }
 
-  @Delete(':index')
-  deleteUser(@Param('index', ParseIntPipe) index: number) {
-    return this.usersService.deleteUser(index);
+  @Delete(':id')
+  deleteUser(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.deleteUser(id);
   }
 }
