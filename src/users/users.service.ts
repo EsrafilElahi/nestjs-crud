@@ -50,6 +50,7 @@ export class UsersService {
     }
 
     this.userRepository.delete(id);
+    return 'user deleted!';
     // this.userRepository.remove(user); ---> this is for delete user with userData
     // this.userRepository.remove([user1, user2]); ---> this is for delete user with userData of array
   }
