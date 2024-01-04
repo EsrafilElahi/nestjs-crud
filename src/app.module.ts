@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
+import config from './config/config';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { UserEntity } from './entities/user.entity';
 
     // custom nestjs configs
     ConfigModule.forRoot({
+      load: [config],
       envFilePath: 'dev.env',
       isGlobal: true, // for use another modules
     }),
