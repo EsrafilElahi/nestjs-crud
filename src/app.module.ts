@@ -20,7 +20,11 @@ import { UserEntity } from './entities/user.entity';
       synchronize: true,
     }),
     UsersModule,
-    ConfigModule.forRoot(),
+
+    // custom nestjs configs
+    ConfigModule.forRoot({
+      envFilePath: 'dev.env',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
