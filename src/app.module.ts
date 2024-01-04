@@ -14,11 +14,11 @@ import config from './config/config';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'esrafil',
-      password: '1234',
-      database: 'nest',
+      host: String(process.env.POSTGRES_HOST),
+      port: Number(process.env.PORT),
+      username: String(process.env.POSTGRES_USER),
+      password: String(process.env.POSTGRES_PASSWORD),
+      database: String(process.env.POSTGRES_DATABASE),
       entities: [UserEntity],
       synchronize: true,
     }),
