@@ -9,6 +9,7 @@ import { UserEntity } from './entities/user.entity';
 import config from './config/config';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { APP_GUARD } from '@nestjs/core';
         host: configService.get<string>('POSTGRES_HOST'),
         port: configService.get<number>('POSTGRES_PORT'),
       }),
+      inject: [UsersService],
     }),
 
     UsersModule,
