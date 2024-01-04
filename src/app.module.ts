@@ -24,6 +24,7 @@ import { UserEntity } from './entities/user.entity';
     // custom nestjs configs
     ConfigModule.forRoot({
       envFilePath: 'dev.env',
+      isGlobal: true, // for use another modules
     }),
   ],
   controllers: [AppController],
