@@ -8,8 +8,6 @@ import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import config from './config/config';
 
-// const dbUser = ConfigService.get<string>('DATABASE_USER');
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
