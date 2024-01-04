@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import config from './config/config';
@@ -13,9 +13,12 @@ import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
     // custom confilg db
-    // ConfigModule.forRoot({
+    // ConfigModule.forRoot({ ---> forRoot is useful when the registerAs is required across entire app
     //   load: [databaseConfig],
     // }),
+
+    // or this
+    // ConfigModule.forFeature(databaseConfig) ---> forFeature is useful to ensure the registerAs is only applicable for the module only.
 
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -27,6 +30,15 @@ import { APP_GUARD } from '@nestjs/core';
       entities: [UserEntity],
       synchronize: true,
     }),
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        host: configService.get<string>('POSTGRES_HOST'),
+        port: configService.get<number>('POSTGRES_PORT'),
+      }),
+    }),
+
     UsersModule,
 
     // custom nestjs configs
