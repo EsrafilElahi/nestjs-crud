@@ -12,6 +12,11 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
+    // custom confilg db
+    // ConfigModule.forRoot({
+    //   load: [databaseConfig],
+    // }),
+
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: String(process.env.POSTGRES_HOST),
