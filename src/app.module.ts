@@ -8,6 +8,8 @@ import { DataSource } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import config from './config/config';
 
+// const dbUser = ConfigService.get<string>('DATABASE_USER');
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -27,6 +29,7 @@ import config from './config/config';
       load: [config],
       envFilePath: 'dev.env',
       isGlobal: true, // for use another modules
+      cache: true, // as accessing process.env can be slow
     }),
   ],
   controllers: [AppController],
