@@ -13,4 +13,7 @@ export class UserEntity {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @Column({ select: false })
+  password: string;
 }
