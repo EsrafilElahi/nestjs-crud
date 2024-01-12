@@ -21,6 +21,7 @@ import { UsersService } from './users/users.service';
     // or this
     // ConfigModule.forFeature(databaseConfig) ---> forFeature is useful to ensure the registerAs is only applicable for the module only.
 
+    // This is a synchronous configuration method. ---> for static db config data
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: String(process.env.POSTGRES_HOST),
@@ -32,6 +33,7 @@ import { UsersService } from './users/users.service';
       synchronize: true,
     }),
 
+    // This is an asynchronous configuration method. ---> for dynamic and complex db config data
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
